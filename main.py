@@ -29,16 +29,16 @@ skills = {"Русский язык": "soth_ekonom",
 conn = sqlite3.connect("School.db")
 
 if __name__ == "__main__":
-    a = Classroom_teacher_Junior()
-    b = Me()
+    Classroom_teacher_Junior = Classroom_teacher_Junior()
+    Me = Me()
     while True:
-        if time.ctime(b.time).split()[3] == "00:00:00":
-            b.loss_one_skill()
-            b.one_minute()
-        elif b.hod != 0:
-            print(f"Вам осталось ждать {b.hod} минут")
-            b.none_hod()
-            b.one_minute()
+        if time.ctime(Me.time).split()[3] == "00:00:00":
+            Me.loss_one_skill()
+            Me.one_minute()
+        elif Me.hod != 0:
+            print(f"Вам осталось ждать {Me.hod} минут")
+            Me.none_hod()
+            Me.one_minute()
             time.sleep(0.4)
         else:
             wwod = input(
@@ -48,29 +48,29 @@ if __name__ == "__main__":
             else:
                 wwod = int(wwod)
                 if wwod == 1:
-                    a.respect_with_teacher()
+                    Classroom_teacher_Junior.respect_with_teacher()
                 elif wwod == 2:
-                    b.take_money()
+                    Me.take_money()
                 elif wwod == 3:
-                    b.info()
+                    Me.info()
                 elif wwod == 4:
-                    schedule_now = schedule[day_week(time.ctime(b.time))]
-                    if not time_test(time.ctime(b.time), day_week_start=6, day_week_finish=7):
-                        if time_test(time.ctime(b.time), hour_start=8, hour_finish=8, minute_start=30,
+                    schedule_now = schedule[day_week(time.ctime(Me.time))]
+                    if not time_test(time.ctime(Me.time), day_week_start=6, day_week_finish=7):
+                        if time_test(time.ctime(Me.time), hour_start=8, hour_finish=8, minute_start=30,
                                      minute_finish=30):
-                            b.study(schedule_now[0])
-                        elif time_test(time.ctime(b.time), hour_start=9, hour_finish=9, minute_start=25,
+                            Me.study(schedule_now[0])
+                        elif time_test(time.ctime(Me.time), hour_start=9, hour_finish=9, minute_start=25,
                                        minute_finish=25):
-                            b.study(schedule_now[1])
-                        elif time_test(time.ctime(b.time), hour_start=10, hour_finish=10, minute_start=25,
+                            Me.study(schedule_now[1])
+                        elif time_test(time.ctime(Me.time), hour_start=10, hour_finish=10, minute_start=25,
                                        minute_finish=25):
-                            b.study(schedule_now[2])
-                        elif time_test(time.ctime(b.time), hour_start=11, hour_finish=11, minute_start=20,
+                            Me.study(schedule_now[2])
+                        elif time_test(time.ctime(Me.time), hour_start=11, hour_finish=11, minute_start=20,
                                        minute_finish=20):
-                            b.study(schedule_now[3])
-                        elif time_test(time.ctime(b.time), hour_start=12, hour_finish=12, minute_start=15,
+                            Me.study(schedule_now[3])
+                        elif time_test(time.ctime(Me.time), hour_start=12, hour_finish=12, minute_start=15,
                                        minute_finish=15):
-                            b.study(schedule_now[4])
+                            Me.study(schedule_now[4])
                         else:
                             print("Не то время для учёбы")
                     else:
@@ -78,7 +78,7 @@ if __name__ == "__main__":
                 elif wwod == 5:
                     minute = input("Сколько минут хочешь подождать? ")
                     if minute.isdigit():
-                        b.some_hod(int(minute))
+                        Me.some_hod(int(minute))
                     else:
                         print("Введи число")
                 elif wwod == 6:
