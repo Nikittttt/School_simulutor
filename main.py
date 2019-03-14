@@ -1,7 +1,7 @@
 import time
 from father_classes import Classroom_teacher_Junior, Me
 import sqlite3
-from time_school import time_test, day_week
+from time_school import time_test, day_week, one_minute, ctime_time
 
 
 schedule = {1: ["ОРКСЭ", "Математика", "Музыка", "Русский язык", "Физкультура"],
@@ -32,13 +32,13 @@ if __name__ == "__main__":
     Classroom_teacher_Junior = Classroom_teacher_Junior()
     Me = Me()
     while True:
-        if time.ctime(Me.time).split()[3] == "00:00:00":
+        if ctime_time().split()[3] == "00:00:00":
             Me.loss_one_skill()
-            Me.one_minute()
+            one_minute()
         elif Me.hod != 0:
             print(f"Вам осталось ждать {Me.hod} минут")
             Me.none_hod()
-            Me.one_minute()
+            one_minute()
             time.sleep(0.4)
         else:
             wwod = input(
@@ -54,21 +54,21 @@ if __name__ == "__main__":
                 elif wwod == 3:
                     Me.info()
                 elif wwod == 4:
-                    schedule_now = schedule[day_week(time.ctime(Me.time))]
-                    if not time_test(time.ctime(Me.time), day_week_start=6, day_week_finish=7):
-                        if time_test(time.ctime(Me.time), hour_start=8, hour_finish=8, minute_start=30,
+                    schedule_now = schedule[day_week(ctime_time())]
+                    if not time_test(day_week_start=6, day_week_finish=7):
+                        if time_test(hour_start=8, hour_finish=8, minute_start=30,
                                      minute_finish=30):
                             Me.study(schedule_now[0])
-                        elif time_test(time.ctime(Me.time), hour_start=9, hour_finish=9, minute_start=25,
+                        elif time_test(hour_start=9, hour_finish=9, minute_start=25,
                                        minute_finish=25):
                             Me.study(schedule_now[1])
-                        elif time_test(time.ctime(Me.time), hour_start=10, hour_finish=10, minute_start=25,
+                        elif time_test(hour_start=10, hour_finish=10, minute_start=25,
                                        minute_finish=25):
                             Me.study(schedule_now[2])
-                        elif time_test(time.ctime(Me.time), hour_start=11, hour_finish=11, minute_start=20,
+                        elif time_test(hour_start=11, hour_finish=11, minute_start=20,
                                        minute_finish=20):
                             Me.study(schedule_now[3])
-                        elif time_test(time.ctime(Me.time), hour_start=12, hour_finish=12, minute_start=15,
+                        elif time_test(hour_start=12, hour_finish=12, minute_start=15,
                                        minute_finish=15):
                             Me.study(schedule_now[4])
                         else:
