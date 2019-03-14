@@ -1,8 +1,7 @@
 from random import randint
 from time import ctime
-from time_school import new_minute, check_time_s, time_test, day_week
+from time_school import check_time_s, day_week
 from teacher import check_teacher
-import sqlite3
 from learner import money_learner, None_hod, check_learner, learner_study, loss_of_skill, schedule_on_day
 
 schedule = {1: ["ОРКСЭ", "Математика", "Музыка", "Русский язык", "Физкультура"],
@@ -27,8 +26,7 @@ skills = {"Русский язык": "soth_ekonom",
           "Азбука здоровья": "him_bio"}
 
 list_of_name = [["Ева", "Валерия", "Софья", "Алина", "Виктория", "Дарья", "Эвелина"],
-     ["Роман", "Артём", "Герман", "Максим", "Денис", "Андрей", "Даниил"]]
-
+                ["Роман", "Артём", "Герман", "Максим", "Денис", "Андрей", "Даниил"]]
 
 lesson_time = ["8:30-9:10", "9:25-10:05", "10:25-11:05", "11:20-12:00", "12:15-12:55", "13:10-13:50", "14:00-14:40"]
 
@@ -46,8 +44,6 @@ class Me:
     def __init__(self):
         self.id = 0
         check = check_learner(self.id, list_of_name)
-        check_time = check_time_s()
-        self.time = check_time[0]
         self.name = check[1]
         self.is_man = check[2]
         self.money = check[3]
@@ -57,10 +53,10 @@ class Me:
         self.hod = check[7]
 
     def info(self):
-        print(f"\n{ctime(self.time)}\n"
+        print(f"\n{ctime(check_time_s())}\n"
               f"Тебя зовут {self.name}\n"
               f"{self.money} - у тебя денег\n"
-              f"Расписание: {schedule_on_day(schedule[day_week(ctime(self.time))], lesson_time)}\n"
+              f"Расписание: {schedule_on_day(schedule[day_week(ctime(check_time_s()))], lesson_time)}\n"
               f"{self.him_bio} - у тебя способностей в хим.био.\n"
               f"{self.fiz_math} - у тебя способностей в физ.мате\n"
               f"{self.soth_ekonom} - у тебя способностей в соц.экономе\n")
@@ -81,10 +77,6 @@ class Me:
     def one_hod(self):
         self.hod = 1
         Me().none_hod()
-
-    def one_minute(self):
-        self.time += 60
-        new_minute(self.time)
 
     def some_hod(self, hod):
         self.hod = hod
@@ -121,3 +113,4 @@ class Classroom_teacher_Junior():
             print(f"\nТы счастливчик, у тебя целых {self.respect} отношений"
                   " с классным руководителем, скажу по секрету, тебе не надо беспокоиться даже"
                   " о шторах не говоря уж об оценках и драках\n")
+
