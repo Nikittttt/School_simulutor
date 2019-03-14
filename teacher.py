@@ -26,3 +26,4 @@ def check_teacher():
         cursor_teacher.execute(sql, ["Classroom"])
         check = cursor_teacher.fetchone()
     return check
+
