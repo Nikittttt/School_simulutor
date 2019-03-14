@@ -1,4 +1,5 @@
 import sqlite3
+import time
 
 conn = sqlite3.connect("School.db")
 cursor_time = conn.cursor()
@@ -11,8 +12,8 @@ except sqlite3.OperationalError:
     pass
 
 
-def new_minute(time):
-    sql = f"UPDATE time SET time={time}"
+def one_minute():
+    sql = f"UPDATE time SET time={check_time_s()+60}"
     cursor_time.execute(sql)
     conn.commit()
 
@@ -27,7 +28,11 @@ def check_time_s():
         sql = "SELECT * FROM time"
         cursor_time.execute(sql)
         check_time = cursor_time.fetchone()
-    return check_time
+    return check_time[0]
+
+
+def ctime_time():
+    return time.ctime(check_time_s())
 
 
 def day_week(now_time):
@@ -37,13 +42,13 @@ def day_week(now_time):
     return now_day_week
 
 
-def time_test(now_time, year_start=None, year_finish=None, month_start=None, month_finish=None, day_month_start=None,
+def time_test(year_start=None, year_finish=None, month_start=None, month_finish=None, day_month_start=None,
               day_month_finish=None, day_week_start=None, day_week_finish=None, hour_start=None, hour_finish=None,
               minute_start=None, minute_finish=None):
     day_of_week = {"Mon": 1, "Tue": 2, "Wed": 3, "Thu": 4, "Fri": 5, "Sat": 6, "Sun": 7}
     month = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
              "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12}
-    #now_time = "Wed Sep  3 10:30:00 2007"
+    now_time = ctime_time()
     now_time = now_time.split()
     now_day_week = day_of_week[now_time[0]]
     now_month = month[now_time[1]]
